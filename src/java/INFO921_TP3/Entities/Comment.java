@@ -22,17 +22,21 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Comment implements Serializable {
 
+    public Comment() {
+        this.creation_date = new Date();
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="USER_ID")
     private User owner;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="TICKET_ID")
     private Ticket ticket;
-    private String comment;
+    private String content;
     private Date creation_date;
 
     public Long getId() {
@@ -59,12 +63,12 @@ public class Comment implements Serializable {
         this.ticket = ticket;
     }
 
-    public String getComment() {
-        return comment;
+    public String getContent() {
+        return content;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCreation_date() {

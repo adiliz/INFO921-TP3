@@ -8,12 +8,11 @@ package INFO921_TP3.Entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 /**
  *
@@ -22,16 +21,30 @@ import javax.persistence.OneToOne;
 @Entity
 public class Backlog implements Serializable {
 
+    public Backlog() {
+    }
+
+    public Backlog(String name) {
+        this.name = name;
+    }
+
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
 
-    @OneToOne(fetch= FetchType.LAZY, mappedBy="myBacklog")
-    private Agency owner;
     @OneToMany(mappedBy="backlog")
     private List<Ticket> ticketsList;
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -46,6 +59,13 @@ public class Backlog implements Serializable {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
+    }
+    
+    public void addTicket(Ticket t) {
+        this.ticketsList.add(t);
+        if (t.getBacklog()!= this) {
+            t.setBacklog(this);
+        }
     }
 
     @Override

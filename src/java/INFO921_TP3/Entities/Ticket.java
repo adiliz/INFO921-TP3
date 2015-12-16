@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -22,7 +24,16 @@ import javax.persistence.OneToMany;
  * @author Anthony
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "findByBacklogId", query = "SELECT t FROM Ticket t WHERE t.backlog = :curBacklog")
+}) 
 public class Ticket implements Serializable {
+
+    public Ticket() {
+        this.creation_date = new Date();
+    }
+    
+    public static final String GET_TICKET_BY_BACKLOG_ID = "findByBacklogId";
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,9 +44,9 @@ public class Ticket implements Serializable {
     private Integer priority;
     private Integer estimation;
     private String description;
-    @OneToMany(mappedBy="ticket")
+    @OneToMany(mappedBy="ticket", fetch = FetchType.LAZY)
     private List<Comment> commentsList;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="BACKLOG_ID")
     private Backlog backlog;
 
@@ -103,6 +114,13 @@ public class Ticket implements Serializable {
         this.backlog = backlog;
     }
     
+      public void addComment(Comment comment) {
+        this.commentsList.add(comment);
+        if (comment.getTicket()!= this) {
+            comment.setTicket(this);
+        }
+    }
+   
     @Override
     public int hashCode() {
         int hash = 0;

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Backlog #{backlogManagedBean.backlog.name}</title>
+    </h:head>
+    <h:body>
+        <h1>#{backlogManagedBean.backlog.name}</h1>
+         <table>
+            <ui:repeat var="t" value="#{backlogManagedBean.tickets}">
+                 <tr>
+                         <td>#{t.id}</td>
+                         <td>#{t.name}</td>
+                         <td>#{t.creation_date}</td>
+                         <td>#{t.description}</td>
+                         <td>#{t.estimation}</td>
+                         <td>#{t.priority}</td>
+                         <td><h:form><h:commandButton value="Editer" action="#{backlogManagedBean.edit(t)}" styleClass="sansLabel" /></h:form></td>
+                         <td><h:form><h:commandButton value="Commenter" action="#{userManagedBean.initComment(t)}" styleClass="sansLabel" /></h:form></td>
+                         <td><h:form><h:commandButton value="Supprimer" action="#{backlogManagedBean.delete(t)}" styleClass="sansLabel" /></h:form></td>
+                         <td> <c:if test="#{not empty t.getCommentsList()}"><h:form><h:commandButton value="#{t.commentsList.size()} commentaires" action="#{backlogManagedBean.diplayTicketComments(t)}" styleClass="sansLabel" /></h:form></c:if></td>
+                         
+                 </tr>
+            </ui:repeat>
+        </table>
+        
+    <c:if test="#{not empty backlogManagedBean.editTicket}">x
+    <h:form>
+            <fieldset>
+                <legend>Editer un ticket</legend>
+                <h:outputLabel for="name">Nom</h:outputLabel>
+                <h:inputText id="name" value="#{backlogManagedBean.editTicket.name}" required="true" size="20" maxlength="20" />
+                <h:outputLabel for="description">Description</h:outputLabel>
+                <h:inputText id="description" value="#{backlogManagedBean.editTicket.description}" required="true" size="20" maxlength="20" />
+                <h:outputLabel for="estimation">Estimation</h:outputLabel>
+                <h:inputText id="estimation" value="#{backlogManagedBean.editTicket.estimation}" required="true" size="20" maxlength="20" converter="javax.faces.Integer" />
+                 <h:outputLabel for="priority">Prioritée</h:outputLabel>
+                 <h:inputText id="priority" value="#{backlogManagedBean.editTicket.priority}" required="true" size="20" maxlength="20" converter="javax.faces.Integer" />
+                 <h:commandButton value="Ajouter" action="#{backlogManagedBean.updateTicket()}" styleClass="sansLabel" />
+            </fieldset>
+        </h:form>
+</c:if>
+        
+   <c:if test="#{not empty backlogManagedBean.displayedComments}">
+       <ui:repeat var="c" value="#{backlogManagedBean.displayedComments}">
+           <fieldset>
+               <p>
+                   Créé par: #{c.owner.first}  #{c.owner.last} 
+                   #{c.content}
+                   Le: #{c.creation_date}
+                   
+               </p>
+           </fieldset>
+       </ui:repeat>
+       <h:form> <h:commandButton value="Ajouter" action="#{backlogManagedBean.undiplayTicketComments()}" styleClass="sansLabel" /></h:form>
+</c:if>
+ <c:if test="#{not empty userManagedBean.comment}">
+    <h:form>
+            <fieldset>
+                <legend>Ajouter un commentaire</legend>
+                <h:outputLabel for="comment">Commentaire</h:outputLabel>
+                <h:inputText id="name" value="#{userManagedBean.comment.content}" required="true" size="20" maxlength="20" ></h:inputText>
+                <h:commandButton value="Ajouter" action="#{userManagedBean.addComment()}" styleClass="sansLabel" />
+            </fieldset>
+        </h:form>
+</c:if>
+        
+        
+       
+        
+        <h:form>
+            <fieldset>
+                <legend>Creer un ticket</legend>
+                <h:outputLabel for="name">Nom</h:outputLabel>
+                <h:inputText id="name" value="#{backlogManagedBean.ticket.name}" required="true" size="20" maxlength="20" />
+                <h:outputLabel for="description">Description</h:outputLabel>
+                <h:inputText id="description" value="#{backlogManagedBean.ticket.description}" required="true" size="20" maxlength="20" />
+                <h:outputLabel for="estimation">Estimation</h:outputLabel>
+                <h:inputText id="estimation" value="#{backlogManagedBean.ticket.estimation}" required="true" size="20" maxlength="20" converter="javax.faces.Integer" />
+                 <h:outputLabel for="priority">Prioritée</h:outputLabel>
+                 <h:inputText id="priority" value="#{backlogManagedBean.ticket.priority}" required="true" size="20" maxlength="20" converter="javax.faces.Integer" />
+                 <h:commandButton value="Ajouter" action="#{backlogManagedBean.newTicket}" styleClass="sansLabel" />
+            </fieldset>
+        </h:form>
+    </h:body>
+</html>
+

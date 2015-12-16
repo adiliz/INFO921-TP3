@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 /**
@@ -19,14 +21,21 @@ import javax.persistence.OneToOne;
  * @author Anthony
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "GET_ALL_AGENCY", query = "SELECT a FROM Agency a")
+})
 public class Agency implements Serializable {
 
+    public Agency() {
+    }
+
+    public static final String GET_ALL_AGENCY = "GET_ALL_AGENCY";
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="BACKLOG_ID")
     private Backlog myBacklog;
 

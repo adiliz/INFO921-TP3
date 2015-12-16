@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"> 
+    <h:head>
+        <meta charset="utf-8" />
+        <title>Inscription</title>
+    </h:head>
+    <h:body>
+      <h:form>
+         <fieldset>
+         	<legend>Inscription</legend>
+                
+                <h:outputLabel for="first">Prénom d'utilisateur <span>*</span></h:outputLabel>
+	        <h:inputText id="first" value="#{userManagedBean.user.first}" required="true" size="20" maxlength="20" />
+	        <h:message id="firstMessage" for="first" errorClass="erreur" />
+	        <br />
+	
+	        <h:outputLabel for="last">Nom d'utilisateur <span class="requis">*</span></h:outputLabel>
+	        <h:inputText id="last" value="#{userManagedBean.user.last}" required="true" size="20" maxlength="20" />
+	        <h:message id="lastMessage" for="last" errorClass="erreur" />
+	        <br />
+	        
+	        <h:messages globalOnly="true" infoClass="info" />
+	
+	        <h:commandButton value="Inscription" action="#{userManagedBean.signIn}" styleClass="sansLabel" />
+	        <br />
+          </fieldset>
+        </h:form> 	
+    </h:body>
+</html>
