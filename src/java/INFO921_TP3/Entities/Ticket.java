@@ -27,7 +27,7 @@ import javax.persistence.OneToMany;
 @NamedQueries({
     @NamedQuery(name = "findByBacklogId", query = "SELECT t FROM Ticket t WHERE t.backlog = :curBacklog")
 }) 
-public class Ticket implements Serializable {
+public class Ticket implements Serializable, Comparable<Ticket> {
 
     public Ticket() {
         this.creation_date = new Date();
@@ -144,6 +144,11 @@ public class Ticket implements Serializable {
     @Override
     public String toString() {
         return "INFO921_TP3.Entities.Ticket[ id=" + id + " ]";
+    }
+
+    @Override
+    public int compareTo(Ticket o) {
+        return (this.priority).compareTo(o.priority);
     }
     
 }

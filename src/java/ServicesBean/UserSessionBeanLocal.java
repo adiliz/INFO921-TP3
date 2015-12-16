@@ -8,6 +8,7 @@ package ServicesBean;
 import INFO921_TP3.Entities.User;
 import javax.ejb.Local;
 
+
 /**
  *
  * @author Anthony

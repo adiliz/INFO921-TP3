@@ -7,6 +7,7 @@ package ServicesBean;
 
 
 import INFO921_TP3.Entities.Backlog;
+import INFO921_TP3.Entities.Comment;
 import INFO921_TP3.Entities.Ticket;
 import java.util.Collection;
 import javax.ejb.Stateless;
@@ -39,6 +40,7 @@ public class TicketSessionBean implements TicketSessionBeanLocal {
 
     @Override
     public void deleteTicket(Ticket ticket) {
+        entityManager.refresh(entityManager.merge(ticket));
         entityManager.remove(entityManager.merge(ticket));
     }
 
@@ -51,6 +53,11 @@ public class TicketSessionBean implements TicketSessionBeanLocal {
             e.printStackTrace();
         }
         return ticketsList;
+    }
+    
+    @Override
+    public void saveComment(Comment comment) {
+       entityManager.persist(comment);
     }
 
     

@@ -28,7 +28,7 @@ public class AgencySessionBean implements AgencySessionBeanLocal {
     public void saveAgency(Agency agency) {
         logger.info("Enregistrement de agence : " + agency.toString());
         if (agency.getId() == null) {
-            Backlog myBacklog = new Backlog(agency.getName()+ "Backlog");
+            Backlog myBacklog = new Backlog(agency.getName()+ " Backlog");
             entityManager.persist(myBacklog);
             logger.info("In save new agency");
             agency.setMyBacklog(myBacklog);

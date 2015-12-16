@@ -8,6 +8,7 @@ package ServicesBean;
 import INFO921_TP3.Entities.Backlog;
 import javax.ejb.Local;
 
+
 /**
  *
  * @author francoiscaillet

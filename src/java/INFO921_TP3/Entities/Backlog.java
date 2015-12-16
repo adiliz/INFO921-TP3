@@ -7,6 +7,7 @@ package INFO921_TP3.Entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ public class Backlog implements Serializable {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy="backlog")
+    @OneToMany(mappedBy="backlog", cascade = CascadeType.REMOVE)
     private List<Ticket> ticketsList;
     
     public String getName() {

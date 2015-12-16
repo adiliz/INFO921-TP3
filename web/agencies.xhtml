@@ -5,28 +5,60 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Agencies List</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"  />
     </h:head>
     <h:body>
-        <h:outputText value="Hello #{userManagedBean.user.first} #{userManagedBean.user.last}" style="font-weight:bold" /> 
-        <table>
-            <ui:repeat var="a" value="#{agencyManagedBean.agencies}">
-                 <tr>
-                         <td>#{a.id}</td>
-                         <td>#{a.name}</td>
-                         <td><h:form><h:commandLink action="#{backlogManagedBean.goToEditPage(a.myBacklog)}" value="Edit"></h:commandLink></h:form></td>
-                 </tr>
-            </ui:repeat>
-        </table>
-        
-        <h:form>
-            <fieldset>
-                <legend>Creer une agence</legend>
-                <h:outputLabel for="name">Nom l'agence</h:outputLabel>
-                <h:inputText id="name" value="#{agencyManagedBean.agency.name}" required="true" size="20" maxlength="20" />
-                <h:commandButton value="Ajouter" action="#{agencyManagedBean.newAgency}" styleClass="sansLabel" />
-            </fieldset>
-        </h:form>
-        
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">INFO_921 BACKLOG</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><h:link value="Agences" outcome="agencies" /></li>
+                        <li><h:link value="Creer un compte" outcome="signIn" /></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container">
+            <hr></hr>
+            <div class="panel panel-default">
+                <div class="panel-heading"> <h1>Liste des agences</h1> <h:outputText value="connecté en tant que : #{userManagedBean.user.first} #{userManagedBean.user.last}" style="font-weight:bold" />  </div> 
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:repeat var="a" value="#{agencyManagedBean.agencies}">
+                        <tr>
+                            <td>#{a.id}</td>
+                            <td>#{a.name}</td>
+                            <td><h:form><h:commandLink action="#{backlogManagedBean.goToEditPage(a.myBacklog)}" value="Edit"></h:commandLink></h:form></td>
+                        </tr>
+                    </ui:repeat>
+                </tbody>·
+            </table>
+            <div style="position: relative;padding: 1rem;margin: 1rem -1rem;border: solid #f7f7f9;">
+                <h:form>
+                    <legend>Creer une agence</legend>
+                    <fieldset class="form-group">
+                        <h:outputLabel for="name">Nom l'agence</h:outputLabel>
+                        <h:inputText class="form-control" id="name" value="#{agencyManagedBean.agency.name}" required="true" size="20" maxlength="20" />
+                    </fieldset>
+                    <h:commandButton value="Ajouter" action="#{agencyManagedBean.newAgency}" styleClass="sansLabel" />
+                </h:form>
+            </div>
+        </div>
     </h:body>
 </html>
 

@@ -3,27 +3,47 @@
     <h:head>
         <meta charset="utf-8" />
         <title>Inscription</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"  />
     </h:head>
     <h:body>
-      <h:form>
-         <fieldset>
-         	<legend>Inscription</legend>
-                
-                <h:outputLabel for="first">Prénom d'utilisateur <span>*</span></h:outputLabel>
-	        <h:inputText id="first" value="#{userManagedBean.user.first}" required="true" size="20" maxlength="20" />
-	        <h:message id="firstMessage" for="first" errorClass="erreur" />
-	        <br />
-	
-	        <h:outputLabel for="last">Nom d'utilisateur <span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="last" value="#{userManagedBean.user.last}" required="true" size="20" maxlength="20" />
-	        <h:message id="lastMessage" for="last" errorClass="erreur" />
-	        <br />
-	        
-	        <h:messages globalOnly="true" infoClass="info" />
-	
-	        <h:commandButton value="Inscription" action="#{userManagedBean.signIn}" styleClass="sansLabel" />
-	        <br />
-          </fieldset>
-        </h:form> 	
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">INFO_921 BACKLOG</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><h:link value="Agences" outcome="agencies" /></li>
+                        <li><h:link value="Creer un compte" outcome="signIn" /></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container">
+            <div style="position: relative;padding: 1rem;margin: 1rem -1rem;border: solid #f7f7f9;">
+                <h:form>
+                    <legend>Inscription</legend>
+                    <fieldset class="form-group">
+                        <h:outputLabel for="first">Prénom d'utilisateur <span>*</span></h:outputLabel>
+                        <h:inputText class="form-control" id="first" value="#{userManagedBean.user.first}" required="true" size="20" maxlength="20" />
+                        <h:message id="firstMessage" for="first" errorClass="erreur" />
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <h:outputLabel for="last">Nom d'utilisateur <span class="requis">*</span></h:outputLabel>
+                        <h:inputText class="form-control" id="last" value="#{userManagedBean.user.last}" required="true" size="20" maxlength="20" />
+                        <h:message id="lastMessage" for="last" errorClass="erreur" />
+                    </fieldset>
+
+                    <h:messages globalOnly="true" infoClass="info" />
+
+                    <h:commandButton value="Inscription" action="#{userManagedBean.signIn}" styleClass="sansLabel" />
+
+
+                </h:form> 
+            </div>
+        </div>
     </h:body>
 </html>

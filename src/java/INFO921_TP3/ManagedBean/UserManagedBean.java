@@ -8,7 +8,7 @@ package INFO921_TP3.ManagedBean;
 import INFO921_TP3.Entities.Comment;
 import INFO921_TP3.Entities.Ticket;
 import INFO921_TP3.Entities.User;
-import ServicesBean.CommentSessionBeanLocal;
+import ServicesBean.TicketSessionBeanLocal;
 import ServicesBean.UserSessionBeanLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -31,7 +31,7 @@ public class UserManagedBean implements Serializable {
     private UserSessionBeanLocal userDAO;
     
     @EJB
-    private CommentSessionBeanLocal commentDAO;
+    private TicketSessionBeanLocal ticketDAO;
     
     private Comment comment;
     
@@ -44,6 +44,7 @@ public class UserManagedBean implements Serializable {
     }
     
      public void initComment(Ticket t){
+         
          this.comment = new Comment();
         this.comment.setOwner(user);
         this.comment.setTicket(t);
@@ -51,7 +52,7 @@ public class UserManagedBean implements Serializable {
     }
     public void addComment(){
         user.getCommentsList().add(comment);
-        commentDAO.saveComment(comment);
+        ticketDAO.saveComment(comment);
         comment.getTicket().addComment(comment);
         setComment(null);
         

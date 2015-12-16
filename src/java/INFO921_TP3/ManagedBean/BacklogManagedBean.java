@@ -13,7 +13,11 @@ import ServicesBean.TicketSessionBeanLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -52,6 +56,12 @@ public class BacklogManagedBean implements Serializable {
         this.ticket = new Ticket();
     }
     
+    public void sortByPriority(){
+        List list = new ArrayList(tickets);
+        Collections.sort(list);
+        setTickets(list);
+    }
+    
     public void edit(Ticket t){
         this.editTicket = t;
     }
@@ -64,15 +74,18 @@ public class BacklogManagedBean implements Serializable {
     
     public void newTicket(){
         ticket.setBacklog(backlog);
+        backlog.addTicket(ticket);
         ticketDAO.saveTicket(ticket);
         this.tickets.add(ticket);
         setTicket(null);
         this.ticket = new Ticket();
+         sortByPriority();
     }
     
      public void updateTicket(){
         ticketDAO.saveTicket(this.editTicket);
         this.setEditTicket(null);
+         sortByPriority();
     }
      
     public void diplayTicketComments(Ticket t){
@@ -86,6 +99,7 @@ public class BacklogManagedBean implements Serializable {
     public String goToEditPage(Backlog b){
         this.backlog = b;
         this.tickets = ticketDAO.getAllByBacklogId(this.backlog);
+        sortByPriority(); 
         return "backlog?faces-redirect=true";
     }
     

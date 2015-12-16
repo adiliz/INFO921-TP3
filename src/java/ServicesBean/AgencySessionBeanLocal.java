@@ -7,11 +7,14 @@ package ServicesBean;
 
 import INFO921_TP3.Entities.Agency;
 import java.util.Collection;
+import javax.ejb.Local;
+
 
 /**
  *
  * @author francoiscaillet
  */
+@Local
 public interface AgencySessionBeanLocal {
     void saveAgency(Agency agency);
     Agency findAgencyById(Long id);

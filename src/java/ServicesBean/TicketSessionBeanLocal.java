@@ -6,16 +6,21 @@
 package ServicesBean;
 
 import INFO921_TP3.Entities.Backlog;
+import INFO921_TP3.Entities.Comment;
 import INFO921_TP3.Entities.Ticket;
 import java.util.Collection;
+import javax.ejb.Local;
+
 
 /**
  *
  * @author francoiscaillet
  */
+@Local
 public interface TicketSessionBeanLocal {
     void saveTicket(Ticket ticket);
     Ticket findTicketById(Long id);
     void deleteTicket(Ticket ticket);
     Collection<Ticket> getAllByBacklogId(Backlog b);
+    public void saveComment(Comment comment);
 }
