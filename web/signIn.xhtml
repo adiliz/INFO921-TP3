@@ -28,12 +28,14 @@
                     <legend>Inscription</legend>
                     <fieldset class="form-group">
                         <h:outputLabel for="first">Prénom d'utilisateur <span>*</span></h:outputLabel>
-                        <h:inputText class="form-control" id="first" value="#{userManagedBean.user.first}" required="true" size="20" maxlength="20" />
+                        <h:inputText class="form-control" id="first" value="#{userManagedBean.user.first}" required="true" 
+                                     size="20" maxlength="20" />
                         <h:message id="firstMessage" for="first" errorClass="erreur" />
                     </fieldset>
                     <fieldset class="form-group">
                         <h:outputLabel for="last">Nom d'utilisateur <span class="requis">*</span></h:outputLabel>
-                        <h:inputText class="form-control" id="last" value="#{userManagedBean.user.last}" required="true" size="20" maxlength="20" />
+                        <h:inputText class="form-control" id="last" value="#{userManagedBean.user.last}" required="true" 
+                                     size="20" maxlength="20" />
                         <h:message id="lastMessage" for="last" errorClass="erreur" />
                     </fieldset>
 

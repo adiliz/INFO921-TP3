@@ -48,7 +48,8 @@ public class TicketSessionBean implements TicketSessionBeanLocal {
     public Collection<Ticket> getAllByBacklogId(Backlog b) {
         Collection<Ticket> ticketsList = null;
         try {
-            ticketsList = entityManager.createNamedQuery(Ticket.GET_TICKET_BY_BACKLOG_ID, Ticket.class).setParameter("curBacklog", b).getResultList();
+            ticketsList = entityManager.createNamedQuery(Ticket.GET_TICKET_BY_BACKLOG_ID, Ticket.class)
+                    .setParameter("curBacklog", b).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
